@@ -10,12 +10,12 @@ def binomio(n, k, mode=0):
         result = result%5
         if result == 0:
             return " "
-        elif result == 1:
-            return "+"
-        elif result == 2:
-            return "Ç"
-        elif result == 3:
-            return "´´"
+        # elif result == 1: 
+        #     return "+"
+        # elif result == 2:
+        #     return "Ç"
+        # elif result == 3:
+        #     return "´´"
         else:
             return 1
 
