@@ -22,7 +22,7 @@ Each entry is the binomial coefficient `C(n, k) = n! / (k! × (n−k)!)`. Rows a
 
 ### Mode 1 — Sierpiński Triangle
 
-Each binomial coefficient is reduced `mod 5`. Values equal to `0` become a space; all other values become `1`. This creates a self-similar fractal pattern:
+Each binomial coefficient is reduced `mod 2`. Values equal to `0` become a space; all other values become `1`. This creates a self-similar fractal pattern:
 
 | `C(n,k) mod 2` | Display |
 |:-:|:-:|
