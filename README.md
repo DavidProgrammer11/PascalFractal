@@ -24,10 +24,10 @@ Each entry is the binomial coefficient `C(n, k) = n! / (k! × (n−k)!)`. Rows a
 
 Each binomial coefficient is reduced `mod 5`. Values equal to `0` become a space; all other values become `1`. This creates a self-similar fractal pattern:
 
-| `C(n,k) mod 5` | Display |
+| `C(n,k) mod 2` | Display |
 |:-:|:-:|
 | `0` | ` ` (space) |
-| `1–4` | `1` |
+| `0-1` | `1` |
 
 ### Diagonal Generator
 
