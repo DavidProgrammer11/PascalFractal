@@ -43,10 +43,6 @@ def generate_diagonal(n, l):
             result_list.append(binomial(n + i, i, mode=0))
     return result_list
 
-
-triangle = []
-
-
 def create_triangle_row(x, mode=0):
     """
     Builds a single row of the triangle and appends it to the global list.
@@ -58,7 +54,7 @@ def create_triangle_row(x, mode=0):
     new_list = []
     for i in range(x + 1):
         new_list.append(binomial(x, i, mode))
-    triangle.append(new_list)
+    return new_list
 
 
 def create(rows, mode=0):
@@ -74,10 +70,10 @@ def create(rows, mode=0):
     Returns:
         list: A list of rows, each row being a list of values.
     """
+    triangle = []
     for i in range(rows + 1):
-        create_triangle_row(i, mode)
+        triangle.append(create_triangle_row(i, mode))
     return triangle
-
 
 def draw_triangle(row_list):
     """
