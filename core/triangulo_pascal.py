@@ -87,16 +87,14 @@ def draw_triangle(row_list):
     Args:
         row_list (list): List of rows to display.
     """
-    global triangle
     max_width = len("   ".join(map(str, row_list[-1])))
     for i in range(len(row_list) - 1):
         row_str = "  ".join(map(str, row_list[i]))
         num_sep = (max_width - len(row_str)) // 2
         print(" " * num_sep + row_str)
-    triangle = []
-
 
 # Test
 print(generate_diagonal(5, 7))
 draw_triangle(create(20, 0))
-draw_triangle(create(10, 1))
+draw_triangle(create(30, 1))
+
