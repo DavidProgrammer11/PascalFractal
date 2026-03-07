@@ -43,10 +43,10 @@ print(generate_diagonal(5, 7))
 # [1, 6, 21, 56, 126, 252, 462]
 
 # Display Pascal's Triangle (20 rows)
-draw_triangle(create(20, mode=0))
+draw_triangle(create(30, mode=0))
 
 # Display Sierpiński Triangle (10 rows)
-draw_triangle(create(10, mode=1))
+draw_triangle(create(20, mode=1))
 ```
 
 ---
