@@ -27,7 +27,7 @@ Each binomial coefficient is reduced `mod 5`. Values equal to `0` become a space
 | `C(n,k) mod 2` | Display |
 |:-:|:-:|
 | `0` | ` ` (space) |
-| `0-1` | `1` |
+| `1` | `1` |
 
 ### Diagonal Generator
 
