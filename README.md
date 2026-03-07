@@ -64,7 +64,7 @@ draw_triangle(create(10, mode=1))
 
 ## Example Output
 
-**Pascal's Triangle — `create(5, mode=0)`**
+**Pascal's Triangle — `create(20, mode=0)`**
 
 ```
                                                                          1
@@ -89,7 +89,7 @@ draw_triangle(create(10, mode=1))
                  1  19  171  969  3876  11628  27132  50388  75582  92378  92378  75582  50388  27132  11628  3876  969  171  19  1
 ```
 
-**Sierpiński Triangle — `create(8, mode=1)`**
+**Sierpiński Triangle — `create(20, mode=1)`**
 
 ```
                                         1
