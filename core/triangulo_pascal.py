@@ -1,5 +1,10 @@
 from math import factorial
+from functools import lru_cache
 
+# Memoization
+@lru_cache
+def _coef_binomial(n,k):
+    return (factorial(n) // (factorial(k) * (factorial(n - k))))
 
 def binomial(n, k, mode=0):
     """
@@ -10,16 +15,16 @@ def binomial(n, k, mode=0):
         k (int): Number of chosen elements.
         mode (int): Output mode.
             0 -> returns the numeric value.
-            1 -> returns Sierpiński display value (mod 5).
+            1 -> returns Sierpiński display value.
 
     Returns:
         int | str: The binomial coefficient or a display character.
     """
-    result = (factorial(n) // (factorial(k) * (factorial(n - k))))
+    result = _coef_binomial(n,k)
     if mode == 0:
         return result
     elif mode == 1:
-        result = result % 5
+        result = result % 2
         if result == 0:
             return " "
         else:
