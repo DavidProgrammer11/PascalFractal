@@ -1,105 +1,108 @@
-# PascalFractal
-# 🔺 Pascal's Triangle & Sierpiński Triangle Generator
+# 🔺 PascalFractal
 
-A Python implementation for generating and visualizing **Pascal's Triangle** and the **Sierpiński Triangle** fractal pattern, with support for diagonal sequence generation.
+A Python tool for generating and visualizing **Pascal's Triangle** and the **Sierpiński Triangle** fractal pattern, including diagonal sequence extraction via the hockey stick identity.
+
+No external dependencies — just Python 3 and the built-in `math` module.
 
 ---
 
 ## Features
 
-- **Pascal's Triangle** — Generate and display any number of rows
-- **Sierpiński Triangle** — Derived from Pascal's triangle using modular arithmetic (mod 5), with custom symbol mapping
-- **Diagonal Generator** — Extract diagonal sequences from Pascal's triangle using the hockey stick identity
-- Configurable display modes for both numeric and symbolic output
+- **Pascal's Triangle** — Generate and display any number of rows with centered terminal output
+- **Sierpiński Triangle** — Derived from Pascal's triangle using `C(n,k) mod 5`, producing a fractal pattern
+- **Diagonal Generator** — Extract diagonal sequences using the identity `C(n+i, i)`
 
 ---
 
 ## How It Works
 
-### Pascal's Triangle
-Each entry is a binomial coefficient `C(n, k) = n! / (k! * (n-k)!)`. Rows are computed and centered for display.
+### Mode 0 — Pascal's Triangle
 
-### Sierpiński Triangle (mode 1)
-Each binomial coefficient is taken `mod 5` and mapped to a symbol:
+Each entry is the binomial coefficient `C(n, k) = n! / (k! × (n−k)!)`. Rows are computed and centered for terminal display.
 
-| Value (mod 5) | Symbol |
+### Mode 1 — Sierpiński Triangle
+
+Each binomial coefficient is reduced `mod 5`. Values equal to `0` become a space; all other values become `1`. This creates a self-similar fractal pattern:
+
+| `C(n,k) mod 5` | Display |
 |:-:|:-:|
-| 0 | ` ` (space) |
-| 1 | `+` |
-| 2 | `Ç` |
-| 3 | `´´` |
-| 4 | `1` |
-
-This produces a fractal-like pattern reminiscent of the classic Sierpiński triangle.
+| `0` | ` ` (space) |
+| `1–4` | `1` |
 
 ### Diagonal Generator
-Uses the identity `C(n+i, i)` to produce the diagonal sequence starting at row `n`, for `l` elements.
+
+Uses the identity `C(n+i, i)` to extract the diagonal sequence starting at row `n` for `l` elements.
 
 ---
 
 ## Usage
 
 ```python
-from math import factorial
+# Generate a diagonal sequence starting at row 5, length 7
+print(generate_diagonal(5, 7))
+# [1, 6, 21, 56, 126, 252, 462]
 
-# Generate a diagonal sequence starting at row 5, length 6
-print(generate_diagonal(5, 6))
+# Display Pascal's Triangle (20 rows)
+draw_triangle(create(20, mode=0))
 
-# Display Pascal's Triangle with 30 rows
-draw_triangle(create(30, mode=0))
-
-# Display Sierpiński Triangle with 70 rows
-draw_triangle(create(70, mode=1))
+# Display Sierpiński Triangle (10 rows)
+draw_triangle(create(10, mode=1))
 ```
 
-### Function Reference
+---
+
+## Function Reference
 
 | Function | Description |
 |---|---|
-| `binomio(n, k, mode)` | Computes `C(n,k)`. `mode=0` returns the integer; `mode=1` returns a symbol based on `C(n,k) % 5` |
-| `generate_diagonal(n, l)` | Returns a list of `l` binomial coefficients along the diagonal starting at `C(n,0)` |
-| `create(rows, mode)` | Builds the triangle as a list of rows up to `rows`. `mode=0` = Pascal, `mode=1` = Sierpiński |
-| `draw_triangle(row_list)` | Prints the triangle centered in the console |
+| `binomial(n, k, mode)` | Computes `C(n,k)`. `mode=0` returns the integer value; `mode=1` returns display value based on `C(n,k) % 5` |
+| `generate_diagonal(n, l)` | Returns `l` binomial coefficients along the diagonal starting at `C(n, 0)` |
+| `create(rows, mode)` | Builds the full triangle as a list of rows. `mode=0` = Pascal, `mode=1` = Sierpiński |
+| `draw_triangle(row_list)` | Prints the triangle centered in the console and resets internal state |
+
+---
+
+## Example Output
+
+**Pascal's Triangle — `create(5, mode=0)`**
+
+```
+    1
+   1 1
+  1 2 1
+ 1 3 3 1
+1 4 6 4 1
+```
+
+**Sierpiński Triangle — `create(8, mode=1)`**
+
+```
+1
+1 1
+1   1
+1 1 1 1
+1       1
+1 1     1 1
+1   1   1   1
+1 1 1 1 1 1 1 1
+```
 
 ---
 
 ## Requirements
 
 - Python 3.x
-- No external dependencies — only the built-in `math` module is used
-
----
-
-## Example Output
-
-**Pascal's Triangle (5 rows):**
-```
-        1
-       1 1
-      1 2 1
-     1 3 3 1
-    1 4 6 4 1
-```
-
-**Sierpiński Triangle (symbolic, 10 rows):**
-```
-+
-+ +
-+ Ç +
-+ ++ ++
-+    +    +
-...
-```
+- No external dependencies
 
 ---
 
 ## Notes
 
-- `triangle` is used as a global list that gets reset after each `draw_triangle()` call. If you plan to generate multiple triangles in sequence, make sure to call `draw_triangle()` between each `create()` call.
-- For very large row counts (e.g. 1000+), computation may be slow due to exact factorial arithmetic.
+- `triangle` is a global list that resets after each `draw_triangle()` call. Always call `draw_triangle()` before calling `create()` again, or the rows will accumulate.
+- For large row counts (500+), computation may be slow due to exact factorial arithmetic. Consider adding `@lru_cache` to `binomial()` for better performance.
 
 ---
 
 ## License
 
-MIT License — feel free to use, modify, and distribute.
+[MIT](LICENSE) — free to use, modify, and distribute.
